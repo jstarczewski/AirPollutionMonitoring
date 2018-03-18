@@ -1,0 +1,45 @@
+package com.company;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Title Form");
+
+        //Create Form Application
+
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new BorderLayout());
+
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.setBackground(Color.BLUE);
+
+        //Create Buttons for parsing and stop parsing
+
+        JButton myStartParsing = new JButton("Start");
+        JButton myStopParsing = new JButton("Stop");
+
+        //Set color for Buttons
+
+        myStartParsing.setBackground(Color.GREEN);
+        myStopParsing.setBackground(Color.red);
+        //
+        JButton choseCityForParsing =new JButton("City");
+        JTextField choseCity =  new JTextField(10);
+
+        //Add Buttons on the form
+
+        panel.add(choseCityForParsing);
+        panel.add(choseCity);
+        panel.add(myStartParsing);
+        panel.add(myStopParsing);
+
+        frame.add(panel, BorderLayout.SOUTH);
+
+        frame.setVisible(true);
+    }
+}
