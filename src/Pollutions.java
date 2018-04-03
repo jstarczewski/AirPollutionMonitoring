@@ -1,15 +1,15 @@
 public class Pollutions {
-    private String id;
+    private int id;
     private String name;
     private double value;
     private String timestamp;
     private String condition;
 
-    public Pollutions(String id){
+    public Pollutions(int id){
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,5 +44,16 @@ public class Pollutions {
 
     public void setCondition(String condition) {
         this.condition = condition;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder("[ Sensor's id: ");
+        string.append(id);
+        string.append(", Type: " + name + ", Timestamp: " + timestamp + ", Value: ");
+        string.append(value);
+        string.append(" ]\n");
+        String s = string.toString();
+        return s;
     }
 }
