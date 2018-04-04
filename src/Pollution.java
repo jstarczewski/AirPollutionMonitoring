@@ -1,4 +1,5 @@
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ public class Pollution {
     }
 
 
-    private void fillSensors() throws IOException{
+    private void fillSensors() throws IOException, JSONException {
         sensorList = getSensorList();
 
         for (Pollutions sensor: sensorList)
@@ -33,7 +34,9 @@ public class Pollution {
         }
     }
 
-    private List<Pollutions> getSensorList() throws IOException {
+    private List<Pollutions> getSensorList() throws IOException, JSONException {
+
+
 
         List<Pollutions> sensorList = new ArrayList<Pollutions>();
         URL url = new URL(("http://api.gios.gov.pl/pjp-api/rest/station/sensors/" + cityID));
@@ -49,7 +52,7 @@ public class Pollution {
     }
 
 
-    private void getSensorData(Pollutions sensor) throws IOException {
+    private void getSensorData(Pollutions sensor) throws IOException, JSONException {
         URL url = new URL(("http://api.gios.gov.pl/pjp-api/rest/data/getData/"+sensor.getId()));
         JSONObject data = new JSONObject(getTextFromUrl(url));
         sensor.setName(data.getString("key"));
@@ -63,7 +66,7 @@ public class Pollution {
         }
     }
 
-    private void getPollution() throws IOException {
+    private void getPollution() throws IOException, JSONException {
         fillSensors();
         for (Pollutions sensor: sensorList)
         {
@@ -88,7 +91,7 @@ public class Pollution {
 
     }
 
-    public static void main(String []args) throws IOException {
+    public static void main(String []args) throws IOException, JSONException {
         Pollution city = new Pollution(14,"Warszawa");
 
         city.getPollution();
