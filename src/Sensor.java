@@ -1,11 +1,11 @@
-public class Pollutions {
+public class Sensor {
     private int id;
     private String name;
     private double value;
     private String timestamp;
     private String condition;
 
-    public Pollutions(int id){
+    public Sensor(int id){
         this.id = id;
     }
 

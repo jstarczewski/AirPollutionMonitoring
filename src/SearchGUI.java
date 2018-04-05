@@ -1,50 +1,61 @@
-import javafx.event.ActionEvent;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import net.miginfocom.swing.MigLayout;
 
 public class SearchGUI {
 
+    private static JFrame frame;
+    private static JButton searchButton;
+    private static JTextField searchField;
+    private static JList list;
+    private static JButton select;
+    private static DefaultListModel model;
+    private static int currentIndex = -1;
+    private static final Color backgroundCol = Color.WHITE;
 
-    public static class okienko extends JFrame {
-        private JButton button = new JButton("Szukaj");
-        private JTextField input = new JTextField("", 5);
-        private JLabel label = new JLabel("Wpisz miasto");
-        private JLabel labellist = new JLabel("lub wybierz");
-        String []str = {"Warszawa", "Krakow", "Wroclaw", "Gdansk", "Bialystok"};
-        private JList list = new JList(str);
+    public static void main(String []args) {
 
-        public okienko () {
-            super("Zaniczyszczenie powietrza");
-            this.setBounds(100, 100, 250, 300);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = new JFrame("Wybierz Miasto");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(500, 500, 0, 0);
+        renderGUI();
+        frame.pack();
+        frame.setVisible(true);
 
-            Container container = this.getContentPane();
-            container.setLayout(new GridLayout(3, 2, 2, 2));
-            container.add(label);
-            container.add(input);
-            container.add(labellist);
-            container.add(list);
-            button.addActionListener(new ButtonEventListener ());
-            container.add(button);
-        }
-
-        class ButtonEventListener implements ActionListener {
-            public void actionPerformed (ActionEvent e){
-                String message = "";
-                message += "Jezeli miasto znalieziono, to - Wynik wyszukiwania zaniczyszczenia dla " + input.getText() + list.getSelectedValue() + "\n";
-                message += "Jezeli miasta nie ma, to - Miasto " + input.getText() + " nie znaleziono \n";
-                JOptionPane.showMessageDialog(null, message, "Wynik", JOptionPane.PLAIN_MESSAGE);
-            }
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-
-            }
-        }
     }
+    private static void renderGUI() {
 
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new MigLayout());
+        panel.setBackground(backgroundCol);
+        frame.add(panel);
+
+        JLabel city = new JLabel("City:");
+
+        searchField = new JTextField();
+
+        searchButton = new JButton("Search");
+
+        model = new DefaultListModel();
+        list = new JList(model);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        select = new JButton("Choose");
+        select.setEnabled(false);
+
+        panel.add(searchField, "growx, pushx");
+        panel.add(searchButton, "wrap, skip");
+        panel.add(new JScrollPane(list), "growx, pushx, growy, pushy");
+        panel.add(select, "skip, wrap");
+
+        java.util.List<Sensor> Sensors = new Search("Warszawa").getSensorList();
+        for (Sensor sensor : Sensors) {
+            model.addElement(sensor);
+        }
+
+    }
 
 }

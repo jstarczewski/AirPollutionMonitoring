@@ -10,16 +10,16 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pollution {
+public class CurrentPollution {
 
 
 
     private String cityName;
     private int cityID;
-    private List<Pollutions> sensorList;
+    private List<Sensor> sensorList;
 
 
-    public Pollution(int cityID, String cityName){
+    CurrentPollution(int cityID, String cityName){
         this.cityID = cityID;
         this.cityName = cityName;
     }
@@ -28,31 +28,31 @@ public class Pollution {
     private void fillSensors() throws IOException, JSONException {
         sensorList = getSensorList();
 
-        for (Pollutions sensor: sensorList)
+        for (Sensor sensor: sensorList)
         {
             getSensorData(sensor);
         }
     }
 
-    private List<Pollutions> getSensorList() throws IOException, JSONException {
+    private List<Sensor> getSensorList() throws IOException, JSONException {
 
 
 
-        List<Pollutions> sensorList = new ArrayList<Pollutions>();
+        List<Sensor> sensorList = new ArrayList<Sensor>();
         URL url = new URL(("http://api.gios.gov.pl/pjp-api/rest/station/sensors/" + cityID));
         JSONArray sensorArr = new JSONArray(getTextFromUrl(url));
 
         for ( int i = 0; i < sensorArr.length(); i++ )
         {
             JSONObject sensor = sensorArr.getJSONObject(i);
-            sensorList.add(new Pollutions(sensor.getInt("id")));
+            sensorList.add(new Sensor(sensor.getInt("id")));
         }
 
         return sensorList;
     }
 
 
-    private void getSensorData(Pollutions sensor) throws IOException, JSONException {
+    private void getSensorData(Sensor sensor) throws IOException, JSONException {
         URL url = new URL(("http://api.gios.gov.pl/pjp-api/rest/data/getData/"+sensor.getId()));
         JSONObject data = new JSONObject(getTextFromUrl(url));
         sensor.setName(data.getString("key"));
@@ -66,12 +66,13 @@ public class Pollution {
         }
     }
 
-    private void getPollution() throws IOException, JSONException {
+    public List<Sensor> getPollution() throws IOException, JSONException {
         fillSensors();
-        for (Pollutions sensor: sensorList)
+   /*     for (Sensor sensor: sensorList)
         {
             System.out.println(sensor);
-        }
+        }*/
+        return sensorList;
     }
 
     private String getTextFromUrl(URL url) throws IOException
@@ -91,9 +92,9 @@ public class Pollution {
 
     }
 
-    public static void main(String []args) throws IOException, JSONException {
-        Pollution city = new Pollution(14,"Warszawa");
+ /*   public static void main(String []args) throws IOException, JSONException {
+        CurrentPollution city = new CurrentPollution(14,"Warszawa");
 
         city.getPollution();
-    }
+    }*/
 }
