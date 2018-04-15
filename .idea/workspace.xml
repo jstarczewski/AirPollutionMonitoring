@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a74132d8-b5aa-42a3-857e-13805dafa8a4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/AirPollutionMonitoring/CurrentPollution.class" afterPath="$PROJECT_DIR$/out/production/AirPollutionMonitoring/CurrentPollution.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/AirPollutionMonitoring/Search.class" afterPath="$PROJECT_DIR$/out/production/AirPollutionMonitoring/Search.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/AirPollutionMonitoring/SearchGUI.class" afterPath="$PROJECT_DIR$/out/production/AirPollutionMonitoring/SearchGUI.class" />
-      <change beforePath="$PROJECT_DIR$/src/CurrentPollution.java" afterPath="$PROJECT_DIR$/src/CurrentPollution.java" />
-      <change beforePath="$PROJECT_DIR$/src/Ivanek.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Search.java" afterPath="$PROJECT_DIR$/src/Search.java" />
-      <change beforePath="$PROJECT_DIR$/src/SearchGUI.java" afterPath="$PROJECT_DIR$/src/SearchGUI.java" />
-      <change beforePath="$PROJECT_DIR$/src/Sensor.java" afterPath="$PROJECT_DIR$/src/Sensor.java" />
-    </list>
+    <list default="true" id="a74132d8-b5aa-42a3-857e-13805dafa8a4" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -396,12 +386,12 @@
       <workItem from="1522942385748" duration="1742000" />
       <workItem from="1523693763942" duration="9751000" />
       <workItem from="1523803375640" duration="5950000" />
-      <workItem from="1523820320730" duration="3181000" />
+      <workItem from="1523820320730" duration="3335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26271000" />
+    <option name="totallyTimeSpent" value="26425000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />

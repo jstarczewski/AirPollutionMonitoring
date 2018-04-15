@@ -1,0 +1,43 @@
+Product backlog wersja dzika 
+
+
+1.Chcialbym jako zwyklu uzytkownik miec aplikacja ktora wyswietli okienko gdzie wpisze miasto dla
+ktorego chce sprawdzic zanieczyszczenie
+
+	1.1 Uzytkownik powinien miec miejsce do wpisania miasta
+	1.2 Uzytkownik powinien miec mozliwosc zatwierdzenia miasta aby serwis
+sprawdzil czy ono istnieje
+
+2.Chialbym jako zwykly uzytkownik sprawdzic czy miasto ktorego szukam istnieje a jak tak to czy sa w
+nim czujniki, miec mozliwosc zatwierdzenia czjnika
+
+	2.1 Program sprawdza czy wpsiany tekst kwalifikuje sie na nazwe miasta
+	2.2 Program w razie sukcesu wysyla zadanie otrzymania czyjnikow
+	2.3 Jezeli istnieja powinny sie pojawic czujniki
+	2.4 Uzytkownik powinien moc zatwierdzic czujnik i przejsc do innego
+okienka z zanieczyszczeniem
+	2.5 Po zatwierdzeniu program pobiera dane dla wybranego
+czujnika/czujnikow
+
+3.Chcialbym jako zwykly uzytkownik moc wyswietlic zanieczyszczenie dla wybranego przeze mnie miasta w
+oddzielnym okienku
+
+	3.1 Program formatuje pobrane wczesniej dane dla czujnika,
+przygotowuje je do wyswitlenia
+	3.1 Program po zatwierdzeniu przez uzytkownika czujnika wyswietla 2
+okienko z danymi.
+	3.2 Uzytkownik moze w przyjazny sposob zapoznac sie z danymi
+
+4. Chcialbym jako uzytkownik po sprawdzeniu danych przejsc spowrotem do panelu
+wyszukiwania
+
+	4.1 Uzytkownik ma mozliwosc przejscia do poprzedniego okienka
+kliknieciem w odpowiedni przycisk
+	5.1 Program usuwa dane dla poprzedniego czujnika
+
+5.Chcialbym jako uzytkownik w prosty sposob moc zamknac okienka przez
+przycisk X
+
+	5.1 Uzytkownik ma mozliwosc zamkniecia okna przez klikniecie w
+odopowiedni przycisk
+	5.2 Program usuwa dane dla czujnikow
