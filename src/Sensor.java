@@ -5,14 +5,13 @@ public class Sensor {
     private String timestamp;
     private String condition;
 
-    public Sensor(int id){
+    Sensor(int id){
         this.id = id;
     }
 
     public int getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
@@ -40,10 +39,6 @@ public class Sensor {
 
     public String getCondition() {
         return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
     }
 
     @Override

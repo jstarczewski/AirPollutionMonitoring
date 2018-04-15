@@ -1,30 +1,31 @@
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class Search {
 
-    private String cityName;
-    HashMap<String, Integer> cityList;
+    private CurrentPollution currentPollution;
 
-    Search(String cityName) {
-        this.cityName = cityName;
-        cityList = new HashMap<>();
-        cityList.put("Warszawa", 14);
+    Search(String input) {
+        currentPollution = CurrentPollution.getInstance(input);
     }
-    public boolean isCityNameValid(String cityName) {
-        return true;
+    /**TODO
+     *
+     * Trzeba zmienic wyrazenie regularne niech sprawdza tez polskie znaki
+     * albo jakis inny sposob sprawdzenia
+     *
+     * Dopisać jakieś dwie metody sprawdzajace czy jest pusty input i czy dlugosc
+     * przykladowo wieksza niz 3
+     *
+     */
+    private boolean isCityNameValid(String cityName) {
+        return cityName.matches("[a-zA-Z,. ]+");
     }
-    public List<Sensor> getSensorList() {
-        CurrentPollution currentPollution = new CurrentPollution(cityList.get(cityName), cityName);
-        try {
-            return currentPollution.getPollution();
-        }
-        catch (IOException|JSONException e) {
-            return null;
-        }
+
+    public List<Sensor> getPollution(Station station) {
+        return currentPollution.getPollutionFromChosenSensors(station.getStationId());
+    }
+
+    public List<Station> getSensorList() {
+        return currentPollution.getExistingStations();
     }
 
 }
