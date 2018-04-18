@@ -1,11 +1,9 @@
-
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import net.miginfocom.swing.MigLayout;
 
 public class SearchGUI {
 
@@ -22,6 +20,7 @@ public class SearchGUI {
     private static JButton select;
     private static DefaultListModel model;
     private static final Color backgroundCol = Color.WHITE;
+    private static Search search;
 
     public static void main(String[] args) {
 
@@ -38,6 +37,7 @@ public class SearchGUI {
     private static void renderGUI() {
 
         JPanel panel = new JPanel();
+        new MigLayout();
         panel.setLayout(new MigLayout());
         panel.setBackground(backgroundCol);
         frame.add(panel);
@@ -69,6 +69,7 @@ public class SearchGUI {
         panel.add(select, "skip, wrap");
 
 
+
         readInput();
 
 
@@ -86,8 +87,8 @@ public class SearchGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.clear();
-                Search search = new Search(searchField.getText());
-                java.util.List<Station> stations = search.getSensorList();
+                search = new Search(searchField.getText());
+                java.util.List<Station> stations = search.getStationList();
                 for (Station station : stations) {
                     model.addElement(station);
                 }
@@ -96,13 +97,18 @@ public class SearchGUI {
        select.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
-               java.util.List<Sensor> sensors = new Search(searchField.getText())
-                       .getPollution((Station)model
-                       .getElementAt(list.getSelectedIndex()));
+               int index = list.getSelectedIndex();
+               java.util.List<Sensor> sensors = search
+                       .getPollution(
+                               ((Station) model.getElementAt(index))
+                       );
                model.clear();
-               for(Sensor sensor : sensors) {
-                   model.addElement(sensor);
-               }
+//               for(Sensor sensor : sensors) {
+//                   model.addElement(sensor);
+//               }
+
+               PollutionGUI.openPollutionGUI();
+
            }
        });
    }

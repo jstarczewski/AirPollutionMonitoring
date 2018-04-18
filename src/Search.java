@@ -24,7 +24,7 @@ public class Search {
         return currentPollution.getPollutionFromChosenSensors(station.getStationId());
     }
 
-    public List<Station> getSensorList() {
+    public List<Station> getStationList() {
         return currentPollution.getExistingStations();
     }
 

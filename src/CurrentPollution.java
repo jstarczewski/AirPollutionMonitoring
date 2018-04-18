@@ -20,7 +20,7 @@ public class CurrentPollution {
     /**
      * Nie wiem czy ten int jest potrzebny
      */
-    private int cityID = 14;
+    private int cityID;
     private List<Sensor> sensorList;
     private static CurrentPollution instance = null;
 
@@ -29,11 +29,8 @@ public class CurrentPollution {
         this.cityName = cityName;
     }
 
-    public static CurrentPollution getInstance(String cityName) {
+    public static synchronized CurrentPollution getInstance(String cityName) {
         if (instance == null) {
-            instance = new CurrentPollution(cityName);
-        }
-        synchronized (CurrentPollution.class) {
             instance = new CurrentPollution(cityName);
         }
         return instance;
@@ -127,6 +124,11 @@ public class CurrentPollution {
         fillSensors();
         return sensorList;
     }
+
+    public List<Sensor> getPollution() {
+        return sensorList;
+    }
+
 
     private String getTextFromUrl(URL url) throws IOException {
         URLConnection connection = url.openConnection();
