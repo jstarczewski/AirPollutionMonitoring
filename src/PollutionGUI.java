@@ -13,23 +13,23 @@ public class PollutionGUI {
     private static final Color backgroundCol = Color.WHITE;
 
     public static void openPollutionGUI() {
-        frame = new JFrame("Wybierz Miasto");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(500, 500, 0, 0);
-        renderGUI();
-        frame.pack();
-        frame.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                renderGUI();
+            }
+        });
     }
 
     public static void renderGUI() {
 
 
+        frame = new JFrame("Wybierz Miasto");
+       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(0, 0, 0, 0);
         frame = new JFrame("Dane na temat zanieczyszczenia");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(500, 500, 0, 0);
 
-        frame.pack();
-        frame.setVisible(true);
 
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout());
@@ -37,7 +37,10 @@ public class PollutionGUI {
         frame.add(panel);
 
         JLabel city = new JLabel("City:");
+        frame.pack();
+        frame.setSize(600, 400);
 
+        frame.setVisible(true);
 
         close = new JButton("Back to station search");
         close.setEnabled(true);
@@ -56,7 +59,7 @@ public class PollutionGUI {
 
         panel.add(new JScrollPane(list), "growx, pushx, growy, pushy");
         panel.add(close, "dock south");
-        java.util.List<Sensor> stationList = CurrentPollution.getInstance("").getPollution();
+        java.util.List<Sensor> stationList = CurrentPollution.getInstance().getPollution();
         for (Sensor sensor : stationList) {
             model.addElement(sensor);
         }
@@ -73,7 +76,7 @@ public class PollutionGUI {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 frame.dispose();
-
+                SearchGUI.main(null);
             }
         });
     }

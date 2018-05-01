@@ -2,11 +2,22 @@ import java.util.List;
 
 public class Search {
 
+    String input;
+
     private CurrentPollution currentPollution;
 
-    Search(String input) {
-        currentPollution = CurrentPollution.getInstance(input);
+    Search() {
+        currentPollution = CurrentPollution.getInstance();
     }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
     /**TODO
      *
      * Trzeba zmienic wyrazenie regularne niech sprawdza tez polskie znaki
@@ -25,6 +36,7 @@ public class Search {
     }
 
     public List<Station> getStationList() {
+        currentPollution.setCityName(input);
         return currentPollution.getExistingStations();
     }
 

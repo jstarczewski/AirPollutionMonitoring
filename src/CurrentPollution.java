@@ -25,15 +25,29 @@ public class CurrentPollution {
     private static CurrentPollution instance = null;
 
 
-    private CurrentPollution(String cityName) {
-        this.cityName = cityName;
-    }
-
+    //private CurrentPollution(String cityName) {
+  //      this.cityName = cityName;
+//    }
+    /**
     public static synchronized CurrentPollution getInstance(String cityName) {
         if (instance == null) {
             instance = new CurrentPollution(cityName);
         }
         return instance;
+    }**/
+    public static CurrentPollution getInstance() {
+        if(instance == null) {
+            synchronized (CurrentPollution.class) {
+                if (instance == null) {
+                    instance = new CurrentPollution();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     private void fillSensors() {
