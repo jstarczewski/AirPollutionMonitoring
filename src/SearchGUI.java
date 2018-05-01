@@ -96,24 +96,10 @@ public class SearchGUI {
          *
          * */
 
-        SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                model.clear();
-                search.setInput(searchField.getText());
-                java.util.List<Station> stations = search.getStationList();
-                for (Station station : stations) {
-                    model.addElement(station);
-                }
-
-                return null;
-            }
-        };
-
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                swingWorker.execute();
+                executeSwingWorker();
             }
         });
         select.addActionListener(new ActionListener() {
@@ -135,6 +121,22 @@ public class SearchGUI {
             }
         });
     }
+    public static void executeSwingWorker() {
 
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                model.clear();
+                search.setInput(searchField.getText());
+                java.util.List<Station> stations = search.getStationList();
+                for (Station station : stations) {
+                    model.addElement(station);
+                }
+
+                return null;
+            }
+        }.execute();
+
+    }
 
 }
