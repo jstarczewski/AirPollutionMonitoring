@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Search {
@@ -28,7 +29,8 @@ public class Search {
      *
      */
     private boolean isCityNameValid(String cityName) {
-        return cityName.matches("[a-zA-Z,. ]+");
+        System.out.println("jehjksadlk");
+        return cityName.matches( "[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*");
     }
 
     public List<Sensor> getPollution(Station station) {
@@ -36,8 +38,28 @@ public class Search {
     }
 
     public List<Station> getStationList() {
-        currentPollution.setCityName(input);
-        return currentPollution.getExistingStations();
+        if(isCityNameValid(input)) {
+            currentPollution.setCityName(input);
+            return currentPollution.getExistingStations();
+        }
+        else {
+            return (new ArrayList<Station>());
+        }
+   }
+    public boolean isCityNameEmpty(String cityName) {
+        if (cityName.isEmpty()) {
+            System.out.println("Pustak");
+            return true;
+        }
+
+        else {
+            System.out.println("Nie pustak");
+            return false;
+        }
+
+    }
+    private boolean isNetworkConnectionAviable() {
+        return true;
     }
 
 }

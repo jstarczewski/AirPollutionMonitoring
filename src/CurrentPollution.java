@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,17 +27,19 @@ public class CurrentPollution {
 
 
     //private CurrentPollution(String cityName) {
-  //      this.cityName = cityName;
+    //      this.cityName = cityName;
 //    }
+
     /**
-    public static synchronized CurrentPollution getInstance(String cityName) {
-        if (instance == null) {
-            instance = new CurrentPollution(cityName);
-        }
-        return instance;
-    }**/
+     * public static synchronized CurrentPollution getInstance(String cityName) {
+     * if (instance == null) {
+     * instance = new CurrentPollution(cityName);
+     * }
+     * return instance;
+     * }
+     **/
     public static CurrentPollution getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             synchronized (CurrentPollution.class) {
                 if (instance == null) {
                     instance = new CurrentPollution();
@@ -53,49 +56,43 @@ public class CurrentPollution {
     private void fillSensors() {
         sensorList = getSensorList();
         for (Sensor sensor : sensorList) {
-            try {
-                getSensorData(sensor);
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
+            getSensorData(sensor);
         }
     }
+
+    /*
+     * praca nad obsluga bledow
+     *
+     * */
 
     public List<Station> getExistingStations() {
-        String allStations = "";
-        try {
-            allStations = getTextFromUrl(new URL("http://api.gios.gov.pl/pjp-api/rest/station/findAll"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return findMatchingPaterrns(allStations);
-    }
-
-    private List<Station> findMatchingPaterrns(String res) {
+        String res = getURLfromText("http://api.gios.gov.pl/pjp-api/rest/station/findAll");
         List<Station> stationsList = new ArrayList<>();
+        System.out.println(res);
+        if (res.equals("d")) {
+            System.out.println("tutu");
+            stationsList.add(new Station("Blad podczas odczytu danych z internetu", 0));
+            return stationsList;
+        }
         Pattern p = Pattern.compile("\"id\":\\d+,\"stationName\":(\".{0,6}?" + cityName + ".*?\")");
         Matcher m = p.matcher(res);
         while (m.find()) {
             stationsList.add(new Station(m.group(0)));
+        }
+        if (stationsList.isEmpty()) {
+            stationsList.add(new Station("Poszukiwana stacja nie istnieje oraz nie zanleziono żadnej podobnej", 1));
         }
         return stationsList;
     }
 
     private List<Sensor> getSensorList() {
         List<Sensor> sensorList = new ArrayList<>();
-        URL url = null;
         JSONArray sensorArr = null;
         JSONObject sensor = null;
+        String toUrl = "http://api.gios.gov.pl/pjp-api/rest/station/sensors/" + cityID;
         try {
-            url = new URL(("http://api.gios.gov.pl/pjp-api/rest/station/sensors/" + cityID));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (url != null) {
-                sensorArr = new JSONArray(getTextFromUrl(url));
-            }
-        } catch (JSONException | IOException e) {
+            sensorArr = new JSONArray(getURLfromText(toUrl));
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         /*
@@ -119,17 +116,20 @@ public class CurrentPollution {
         return sensorList;
     }
 
-    private void getSensorData(Sensor sensor) throws IOException, JSONException {
-        URL url = new URL(("http://api.gios.gov.pl/pjp-api/rest/data/getData/" + sensor.getId()));
-        JSONObject data = new JSONObject(getTextFromUrl(url));
-        sensor.setName(data.getString("key"));
-        JSONArray values = data.getJSONArray("values");
-        for (int i = values.length() - 1; i >= 0; i--) {
-            JSONObject measurement = values.getJSONObject(i);
-            if (!(measurement.isNull("value"))) {
-                sensor.setTimestamp(measurement.getString("date"));
-                sensor.setValue(measurement.getDouble("value"));
+    private void getSensorData(Sensor sensor) {
+        try {
+            JSONObject data = new JSONObject("http://api.gios.gov.pl/pjp-api/rest/data/getData/" + sensor.getId());
+            sensor.setName(data.getString("key"));
+            JSONArray values = data.getJSONArray("values");
+            for (int i = values.length() - 1; i >= 0; i--) {
+                JSONObject measurement = values.getJSONObject(i);
+                if (!(measurement.isNull("value"))) {
+                    sensor.setTimestamp(measurement.getString("date"));
+                    sensor.setValue(measurement.getDouble("value"));
+                }
             }
+        } catch (JSONException e) {
+            sensor.setName("Blad odczytu danych");
         }
     }
 
@@ -143,18 +143,28 @@ public class CurrentPollution {
         return sensorList;
     }
 
+    /**
+     * bufferedReader do poprawy
+     **/
 
-    private String getTextFromUrl(URL url) throws IOException {
-        URLConnection connection = url.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF8"));
+    private String getURLfromText(String toUrl) {
 
         StringBuilder response = new StringBuilder();
-        String inputline;
-
-        while ((inputline = in.readLine()) != null)
-            response.append(inputline);
-        in.close();
-
-        return response.toString();
+        String input = "";
+        try {
+            URLConnection urlConnection = (new URL(toUrl)).openConnection();
+            InputStreamReader inputStreamReader = new InputStreamReader(urlConnection.getInputStream());
+            BufferedReader in = new BufferedReader(inputStreamReader);
+            while ((input = in.readLine()) != null) {
+                System.out.println("penta");
+                response.append(input);
+            }
+            in.close();
+            System.out.println(response.toString());
+            input = response.toString();
+        } catch (Exception e) {
+            input = "d";
+        }
+        return input;
     }
 }

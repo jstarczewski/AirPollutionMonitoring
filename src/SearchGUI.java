@@ -99,40 +99,55 @@ public class SearchGUI {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                executeSwingWorker();
+                if (!search.isCityNameEmpty(searchField.getText())) {
+                    executeSwingWorker();
+                }
             }
         });
         select.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = list.getSelectedIndex();
-                java.util.List<Sensor> sensors = search
-                        .getPollution(
-                                ((Station) model.getElementAt(index))
-                        );
-                model.clear();
+                if (!model.isEmpty()) {
+                    int index = list.getSelectedIndex();
+                    java.util.List<Sensor> sensors = search
+                            .getPollution(
+                                    ((Station) model.getElementAt(index))
+                            );
+                    model.clear();
 //               for(Sensor sensor : sensors) {
 //                   model.addElement(sensor);
 //               }
 
-                PollutionGUI.openPollutionGUI();
-                frame.dispose();
+                    PollutionGUI.openPollutionGUI(frame.getAlignmentX(), frame.getAlignmentY());
+                    frame.dispose();
+                }
+                else {
+
+                    System.out.println("Nie ma elementow");
+                    /**
+                     *
+                     * Toascik ze cos nie dziala, i ze nie ma listy
+                     *
+                     *
+                     * */
+                }
 
             }
         });
     }
-    public static void executeSwingWorker() {
+    private static void executeSwingWorker() {
 
         new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
                 model.clear();
+                searchField.setEnabled(false);
                 search.setInput(searchField.getText());
                 java.util.List<Station> stations = search.getStationList();
                 for (Station station : stations) {
                     model.addElement(station);
                 }
-
+                searchField.setEnabled(true);
                 return null;
             }
         }.execute();

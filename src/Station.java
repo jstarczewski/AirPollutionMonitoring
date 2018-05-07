@@ -3,10 +3,14 @@ public class Station {
   //  private String data;
     private String stationName;
     private int stationId;
+
     Station(String data) {
     //    this.data=data;
         stationId = extractStationId(data);
         stationName = extractStationName(data);
+    }
+    Station(String stationName, int error) {
+        this.stationName = stationName;
     }
     private int extractStationId(String data) {
         return Integer.parseInt((data.substring(5).split(",", 2))[0]);

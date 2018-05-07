@@ -12,24 +12,23 @@ public class PollutionGUI {
     private static DefaultListModel model;
     private static final Color backgroundCol = Color.WHITE;
 
-    public static void openPollutionGUI() {
+    public static void openPollutionGUI(float x, float y) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                renderGUI();
+                renderGUI(x,y);
             }
         });
     }
 
-    public static void renderGUI() {
+        static void renderGUI(float x, float y) {
 
 
         frame = new JFrame("Wybierz Miasto");
-       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(0, 0, 0, 0);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds((int)x, (int)y, 0, 0);
         frame = new JFrame("Dane na temat zanieczyszczenia");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout());
