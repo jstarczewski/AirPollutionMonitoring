@@ -21,7 +21,7 @@ public class PollutionGUI {
         });
     }
 
-        static void renderGUI(float x, float y) {
+      private static void renderGUI(float x, float y) {
 
 
         frame = new JFrame("Wybierz Miasto");
@@ -35,7 +35,6 @@ public class PollutionGUI {
         panel.setBackground(backgroundCol);
         frame.add(panel);
 
-        JLabel city = new JLabel("City:");
         frame.pack();
         frame.setSize(600, 400);
 
@@ -45,13 +44,6 @@ public class PollutionGUI {
         close.setEnabled(true);
 
         model = new DefaultListModel();
-
-        /**TODO
-         *
-         *  Tu po prostu brak parametru dla modelu bo wyswietlamy wszystko w jednym okeinku
-         *  potem jak pójdzie do PollutionGUI to sie warninga usunie
-         *
-         */
 
         list = new JList(model);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

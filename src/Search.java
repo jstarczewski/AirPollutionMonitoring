@@ -3,63 +3,42 @@ import java.util.List;
 
 public class Search {
 
-    String input;
-
+    private String input;
+    private List<Station> stationsList = new ArrayList<>();
     private CurrentPollution currentPollution;
 
     Search() {
         currentPollution = CurrentPollution.getInstance();
     }
 
-    public String getInput() {
-        return input;
-    }
-
     public void setInput(String input) {
         this.input = input;
     }
 
-    /**TODO
-     *
-     * Trzeba zmienic wyrazenie regularne niech sprawdza tez polskie znaki
-     * albo jakis inny sposob sprawdzenia
-     *
-     * Dopisać jakieś dwie metody sprawdzajace czy jest pusty input i czy dlugosc
-     * przykladowo wieksza niz 3
-     *
-     */
     private boolean isCityNameValid(String cityName) {
-        System.out.println("jehjksadlk");
-        return cityName.matches( "[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*");
+        return cityName.matches("[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ|\\s]*");
     }
 
-    public List<Sensor> getPollution(Station station) {
-        return currentPollution.getPollutionFromChosenSensors(station.getStationId());
+    public void getPollution(Station station) {
+        currentPollution.getPollutionFromChosenSensors(station.getStationId());
     }
 
     public List<Station> getStationList() {
-        if(isCityNameValid(input)) {
-            currentPollution.setCityName(input);
-            return currentPollution.getExistingStations();
+        stationsList.clear();
+        if (input.isEmpty()) {
+            stationsList.add(new Station(3));
+            return stationsList;
         }
-        else {
-            return (new ArrayList<Station>());
+        if (!isCityNameValid(input)) {
+            stationsList.add(new Station(2));
+            return stationsList;
         }
-   }
-    public boolean isCityNameEmpty(String cityName) {
-        if (cityName.isEmpty()) {
-            System.out.println("Pustak");
-            return true;
-        }
-
-        else {
-            System.out.println("Nie pustak");
-            return false;
-        }
-
+        currentPollution.setCityName(input);
+        return currentPollution.getExistingStations(stationsList);
     }
-    private boolean isNetworkConnectionAviable() {
-        return true;
+    public List<Station> warnAboutEmptySelection() {
+        stationsList.add(new Station(4));
+        return stationsList;
     }
 
 }

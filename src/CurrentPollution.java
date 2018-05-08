@@ -3,10 +3,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -18,26 +15,11 @@ public class CurrentPollution {
 
 
     private String cityName;
-    /**
-     * Nie wiem czy ten int jest potrzebny
-     */
     private int cityID;
     private List<Sensor> sensorList;
     private static CurrentPollution instance = null;
 
 
-    //private CurrentPollution(String cityName) {
-    //      this.cityName = cityName;
-//    }
-
-    /**
-     * public static synchronized CurrentPollution getInstance(String cityName) {
-     * if (instance == null) {
-     * instance = new CurrentPollution(cityName);
-     * }
-     * return instance;
-     * }
-     **/
     public static CurrentPollution getInstance() {
         if (instance == null) {
             synchronized (CurrentPollution.class) {
@@ -60,18 +42,10 @@ public class CurrentPollution {
         }
     }
 
-    /*
-     * praca nad obsluga bledow
-     *
-     * */
-
-    public List<Station> getExistingStations() {
+    public List<Station> getExistingStations(List<Station> stationsList) {
         String res = getURLfromText("http://api.gios.gov.pl/pjp-api/rest/station/findAll");
-        List<Station> stationsList = new ArrayList<>();
-        System.out.println(res);
-        if (res.equals("d")) {
-            System.out.println("tutu");
-            stationsList.add(new Station("Blad podczas odczytu danych z internetu", 0));
+        if (res.equals("Input error")) {
+            stationsList.add(new Station(0));
             return stationsList;
         }
         Pattern p = Pattern.compile("\"id\":\\d+,\"stationName\":(\".{0,6}?" + cityName + ".*?\")");
@@ -80,7 +54,7 @@ public class CurrentPollution {
             stationsList.add(new Station(m.group(0)));
         }
         if (stationsList.isEmpty()) {
-            stationsList.add(new Station("Poszukiwana stacja nie istnieje oraz nie zanleziono żadnej podobnej", 1));
+            stationsList.add(new Station(1));
         }
         return stationsList;
     }
@@ -95,9 +69,6 @@ public class CurrentPollution {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        /*
-         * Tego assert sensorArr != null nie znałem XD
-         * */
         assert sensorArr != null;
         for (int i = 0; i < sensorArr.length(); i++) {
             try {
@@ -118,7 +89,7 @@ public class CurrentPollution {
 
     private void getSensorData(Sensor sensor) {
         try {
-            JSONObject data = new JSONObject("http://api.gios.gov.pl/pjp-api/rest/data/getData/" + sensor.getId());
+            JSONObject data = new JSONObject(getURLfromText("http://api.gios.gov.pl/pjp-api/rest/data/getData/" + sensor.getId()));
             sensor.setName(data.getString("key"));
             JSONArray values = data.getJSONArray("values");
             for (int i = values.length() - 1; i >= 0; i--) {
@@ -143,27 +114,21 @@ public class CurrentPollution {
         return sensorList;
     }
 
-    /**
-     * bufferedReader do poprawy
-     **/
-
     private String getURLfromText(String toUrl) {
 
         StringBuilder response = new StringBuilder();
-        String input = "";
+        String input;
         try {
             URLConnection urlConnection = (new URL(toUrl)).openConnection();
             InputStreamReader inputStreamReader = new InputStreamReader(urlConnection.getInputStream());
             BufferedReader in = new BufferedReader(inputStreamReader);
             while ((input = in.readLine()) != null) {
-                System.out.println("penta");
                 response.append(input);
             }
             in.close();
-            System.out.println(response.toString());
             input = response.toString();
         } catch (Exception e) {
-            input = "d";
+            input = "Input error";
         }
         return input;
     }
