@@ -11,9 +11,9 @@ public class SearchGUI {
     private static JFrame frame;
     private static JButton searchButton;
     private static JTextField searchField;
-    private static JList list;
+    private static JList<Station> list;
     private static JButton select;
-    private static DefaultListModel model;
+    private static DefaultListModel<Station> model;
     private static final Color backgroundCol = Color.WHITE;
     private static Search search = new Search();
 
@@ -47,9 +47,9 @@ public class SearchGUI {
 
         searchButton = new JButton("Search");
 
-        model = new DefaultListModel();
+        model = new DefaultListModel<>();
 
-        list = new JList(model);
+        list = new JList<>(model);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         select = new JButton("Select");
@@ -79,7 +79,7 @@ public class SearchGUI {
             public void actionPerformed(ActionEvent e) {
                 if (!model.isEmpty()) {
                     int index = list.getSelectedIndex();
-                    search.getPollution(((Station) model.getElementAt(index)));
+                    search.getPollution((model.getElementAt(index)));
                     model.clear();
                     PollutionGUI.openPollutionGUI(frame.getAlignmentX(), frame.getAlignmentY());
                     frame.dispose();

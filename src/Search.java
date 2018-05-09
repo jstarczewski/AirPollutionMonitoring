@@ -20,7 +20,7 @@ public class Search {
     }
 
     public void getPollution(Station station) {
-        currentPollution.getPollutionFromChosenSensors(station.getStationId());
+        currentPollution.getPollutionFromChosenSensor(station.getStationId());
     }
 
     public List<Station> getStationList() {

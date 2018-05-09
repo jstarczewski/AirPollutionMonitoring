@@ -35,7 +35,8 @@ public class CurrentPollution {
         this.cityName = cityName;
     }
 
-    private void fillSensors() {
+    public void getPollutionFromChosenSensor(int cityID) {
+        this.cityID=cityID;
         sensorList = getSensorList();
         for (Sensor sensor : sensorList) {
             getSensorData(sensor);
@@ -104,11 +105,6 @@ public class CurrentPollution {
         }
     }
 
-    public List<Sensor> getPollutionFromChosenSensors(int cityID) {
-        this.cityID = cityID;
-        fillSensors();
-        return sensorList;
-    }
 
     public List<Sensor> getPollution() {
         return sensorList;

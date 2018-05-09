@@ -8,8 +8,7 @@ import java.awt.event.ActionListener;
 public class PollutionGUI {
     private static JFrame frame;
     private static JButton close;
-    private static JList list;
-    private static DefaultListModel model;
+    private static DefaultListModel<Sensor> model;
     private static final Color backgroundCol = Color.WHITE;
 
     public static void openPollutionGUI(float x, float y) {
@@ -43,9 +42,9 @@ public class PollutionGUI {
         close = new JButton("Back to station search");
         close.setEnabled(true);
 
-        model = new DefaultListModel();
+        model = new DefaultListModel<>();
 
-        list = new JList(model);
+        JList<Sensor> list = new JList<>(model);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         panel.add(new JScrollPane(list), "growx, pushx, growy, pushy");
