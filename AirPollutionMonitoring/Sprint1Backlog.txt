@@ -1,0 +1,30 @@
+Sprint backlog 1, wersja zwierzeca
+
+W pierwszym sprincie chcemy zrealizowac odpowiednie punkty z product Backlog
+
+1.Chcialbym jako zwyklu uzytkownik miec aplikacja ktora wyswietli okienko gdzie wpisze miasto dla
+ktorego chce sprawdzic zanieczyszczenie
+
+	1.1 Uzytkownik powinien miec miejsce do wpisania miasta
+	1.2 Uzytkownik powinien miec mozliwosc zatwierdzenia miasta aby serwis
+sprawdzil czy ono istnieje
+
+2.Chialbym jako zwykly uzytkownik sprawdzic czy miasto ktorego szukam istnieje a jak tak to czy sa w
+nim czujniki, miec mozliwosc zatwierdzenia czjnika
+
+	2.1 Program sprawdza czy wpsiany tekst kwalifikuje sie na nazwe miasta
+	2.2 Program w razie sukcesu wysyla zadanie otrzymania czyjnikow
+	2.3 Jezeli istnieja powinny sie pojawic czujniki
+	2.4 Uzytkownik powinien moc zatwierdzic czujnik i przejsc do innego
+okienka z zanieczyszczeniem
+	2.5 Po zatwierdzeniu program pobiera dane dla wybranego
+czujnika/czujnikow
+
+Co sie udalo a co nie 
+
+Sukces :
+	1.1
+	2.4
+	
+Nie udalo pobrac z API wszystkich rzeczy bla bla bla, wyswietla sie okeno i
+wszytko z nim gra, wszystko z nim dziala 
