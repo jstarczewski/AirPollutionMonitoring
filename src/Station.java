@@ -23,6 +23,7 @@ public class Station {
             }
             case 4: {
                 this.stationName = "Przed wcisieciem przycisku select prosimy o wyszukanie interesujacej lokacji";
+                break;
             }
         }
     }

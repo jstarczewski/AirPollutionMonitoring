@@ -19,24 +19,42 @@ public class CurrentPollution {
     private List<Sensor> sensorList;
     private static CurrentPollution instance = null;
 
+    /**
+     * public static CurrentPollution getInstance() {
+     * if (instance == null) {
+     * synchronized (CurrentPollution.class) {
+     * if (instance == null) {
+     * instance = new CurrentPollution();
+     * }
+     * }
+     * }
+     * return instance;
+     * }
+     **/
 
-    public static CurrentPollution getInstance() {
+    private CurrentPollution() {
+
+    }
+
+    public static synchronized CurrentPollution getInstance() {
         if (instance == null) {
-            synchronized (CurrentPollution.class) {
-                if (instance == null) {
-                    instance = new CurrentPollution();
-                }
-            }
+            instance = new CurrentPollution();
         }
         return instance;
     }
+
+    /**
+     *
+     * https://stackoverflow.com/questions/574240/is-there-an-advantage-to-use-a-synchronized-method-instead-of-a-synchronized-blo
+     *
+     */
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 
     public void getPollutionFromChosenSensor(int cityID) {
-        this.cityID=cityID;
+        this.cityID = cityID;
         sensorList = getSensorList();
         for (Sensor sensor : sensorList) {
             getSensorData(sensor);
