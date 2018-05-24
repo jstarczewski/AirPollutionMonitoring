@@ -19,9 +19,14 @@ public class CurrentPollution {
     private List<Sensor> sensorList;
     private static CurrentPollution instance = null;
 
+    public String getCityName() {
+        return cityName;
+    }
+
     /**
      * public static CurrentPollution getInstance() {
      * if (instance == null) {
+
      * synchronized (CurrentPollution.class) {
      * if (instance == null) {
      * instance = new CurrentPollution();
@@ -62,7 +67,7 @@ public class CurrentPollution {
     }
 
     public List<Station> getExistingStations(List<Station> stationsList) {
-        String res = getURLfromText("http://api.gios.gov.pl/pjp-api/rest/station/findAll");
+        String res = getInputFromURL("http://api.gios.gov.pl/pjp-api/rest/station/findAll");
         if (res.equals("Input error")) {
             stationsList.add(new Station(0));
             return stationsList;
@@ -84,7 +89,7 @@ public class CurrentPollution {
         JSONObject sensor = null;
         String toUrl = "http://api.gios.gov.pl/pjp-api/rest/station/sensors/" + cityID;
         try {
-            sensorArr = new JSONArray(getURLfromText(toUrl));
+            sensorArr = new JSONArray(getInputFromURL(toUrl));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -108,7 +113,7 @@ public class CurrentPollution {
 
     private void getSensorData(Sensor sensor) {
         try {
-            JSONObject data = new JSONObject(getURLfromText("http://api.gios.gov.pl/pjp-api/rest/data/getData/" + sensor.getId()));
+            JSONObject data = new JSONObject(getInputFromURL("http://api.gios.gov.pl/pjp-api/rest/data/getData/" + sensor.getId()));
             sensor.setName(data.getString("key"));
             JSONArray values = data.getJSONArray("values");
             for (int i = values.length() - 1; i >= 0; i--) {
@@ -128,7 +133,7 @@ public class CurrentPollution {
         return sensorList;
     }
 
-    private String getURLfromText(String toUrl) {
+    private String getInputFromURL(String toUrl) {
 
         StringBuilder response = new StringBuilder();
         String input;

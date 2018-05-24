@@ -4,7 +4,20 @@ public class Sensor {
     private double value;
     private String timestamp;
 
+    public String getName() {
+        return name;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
     Sensor(int id) {
+
         this.id = id;
     }
 
