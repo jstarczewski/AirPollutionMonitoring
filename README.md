@@ -1,7 +1,7 @@
 # About AirPollutionMonitoring
-AirPollutionMonitoring is a small project that we (other contributors and I) created to pass "The basics of SoftwareEngineering" course.
+AirPollutionMonitoring is a small project that we (other contributors and I) created to pass "The basics of Software Engineering" course.
 ## How to use AirPollutionMonitoring
-With AirPollutionMonitoring you can check the air pollution level in the biggest cities of Poland. Simply run the project (main method in SearchGUI class), insert the name of the city and type "Search". If you have internet connection and there are some available sensors in chosen city simply select the nearest sensor of your location and check the pollution.
+With AirPollutionMonitoring you can check the air pollution level in the biggest cities of Poland. Simply run the project (main method in SearchGUI class), insert the name of the city and type "Search". If you have internet connection and there are some available sensors in chosen city simply select the nearest sensor and check the pollution.
 ## Core Java in AirPollutionMonitoring
 1. String Manipulation
 2. REGEX usage
