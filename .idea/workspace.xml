@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e79710a-a006-45cd-b348-777b052a86f2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/CurrentPollutionTest.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Search.java" afterPath="$PROJECT_DIR$/src/Search.java" />
-      <change beforePath="$PROJECT_DIR$/src/SearchTest.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Sensor.java" afterPath="$PROJECT_DIR$/src/Sensor.java" />
-      <change beforePath="$PROJECT_DIR$/src/SensorTest.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Station.java" afterPath="$PROJECT_DIR$/src/Station.java" />
-      <change beforePath="$PROJECT_DIR$/src/StationTest.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/test.java" afterPath="" />
-    </list>
+    <list default="true" id="3e79710a-a006-45cd-b348-777b052a86f2" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +12,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SearchGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SearchGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-693">
@@ -83,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CurrentPollution.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CurrentPollution.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CurrentPollution.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1575">
@@ -505,7 +494,7 @@
       <workItem from="1526042931215" duration="615000" />
       <workItem from="1527147292766" duration="1759000" />
       <workItem from="1527151458454" duration="1899000" />
-      <workItem from="1535119421089" duration="2715000" />
+      <workItem from="1535119421089" duration="3259000" />
     </task>
     <servers />
   </component>
@@ -542,7 +531,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28601000" />
+    <option name="totallyTimeSpent" value="29145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -995,18 +984,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SearchGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-693">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CurrentPollution.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1575">
           <caret line="105" column="39" lean-forward="false" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SearchGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-693">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
