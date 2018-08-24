@@ -11,12 +11,16 @@ public class Search {
         currentPollution = CurrentPollution.getInstance();
     }
 
+    public String getInput() {
+        return input;
+    }
+
     public void setInput(String input) {
         this.input = input;
     }
-
-    private boolean isCityNameValid(String cityName) {
-        return cityName.matches("[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ|\\s]*");
+    //access modified for testing
+    public boolean isCityNameValid(String cityName) {
+        return !cityName.isEmpty() && cityName.matches("[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ|\\s]*");
     }
 
     public void getPollution(Station station) {

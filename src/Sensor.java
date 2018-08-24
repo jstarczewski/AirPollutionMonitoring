@@ -1,4 +1,5 @@
 public class Sensor {
+
     private int id;
     private String name;
     private double value;
@@ -17,7 +18,6 @@ public class Sensor {
     }
 
     Sensor(int id) {
-
         this.id = id;
     }
 

@@ -31,19 +31,22 @@ public class Station {
     Station(String data) {
         //    this.data=data;
         stationId = extractStationId(data);
+        System.out.println(data);
         stationName = extractStationName(data);
     }
 
-    private int extractStationId(String data) {
+    // access changed to public for testing
+    public int extractStationId(String data) {
         return Integer.parseInt((data.substring(5).split(",", 2))[0]);
     }
 
-    private String extractStationName(String data) {
+    // access changed to public for testing
+    public String extractStationName(String data) {
         String tmp = data.substring(5).split(",", 2)[1];
         return tmp.substring(15, tmp.length() - 1);
     }
 
-    private String getStationName() {
+    public String getStationName() {
         return stationName;
     }
 
