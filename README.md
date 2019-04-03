@@ -12,9 +12,9 @@ With AirPollutionMonitoring you can check the air pollution level in the biggest
 7. Basic Swing usage for GUI
 ## Built with
 1. Java
-2. Java Spring
+2. Java Swing
 3. Java JSON
 4. JUnit (for testing)
-5. MigLayout for Java Spring
+5. MigLayout for Java Swing
 ### Files in the project
 The project folder also contains class diagram and states diagram that we had to create to pass the course. 
